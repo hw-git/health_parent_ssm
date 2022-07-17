@@ -391,7 +391,7 @@ CREATE TABLE `t_menu` (
 
 LOCK TABLES `t_menu` WRITE;
 /*!40000 ALTER TABLE `t_menu` DISABLE KEYS */;
-INSERT INTO `t_menu` VALUES (1,'会员管理',NULL,'2',2,'fa-user-md',NULL,NULL,1),(2,'会员档案','/member','/2-1',1,NULL,NULL,1,2),(4,'统计分析','/report-member','/2-3',3,NULL,NULL,1,2),(5,'预约管理',NULL,'3',3,'fa-tty',NULL,NULL,1),(6,'预约列表','/ordersettinglist','/3-1',1,NULL,NULL,5,2),(7,'预约设置','/ordersetting','/3-2',2,NULL,NULL,5,2),(8,'套餐管理','/setmeal','/3-3',3,NULL,NULL,5,2),(9,'检查组管理','/checkgroup','/3-4',4,NULL,NULL,5,2),(10,'检查项管理','/checkitem','/3-5',5,NULL,NULL,5,2),(11,'知识库',NULL,'4',4,'fa-book',NULL,NULL,1),(13,'咨询管理',NULL,'5',5,'fa-phone',NULL,NULL,1),(15,'健康干预',NULL,'6',6,'fa-desktop',NULL,NULL,1),(16,'模板管理','/people-manager','/6-1',1,NULL,NULL,15,2),(17,'干预方案','/health-plan','/6-2',2,NULL,NULL,15,2),(29,'系统设置',NULL,'7',7,'fa-cog',NULL,NULL,1),(30,'菜单管理','/system-list','/7-1',1,NULL,NULL,29,2),(31,'权限管理','/permission','/7-2',2,NULL,NULL,29,2),(43,'工作台',NULL,'1',1,'fa-dashboard',NULL,NULL,1),(46,'运动库','/sport','/4-3',2,NULL,NULL,11,2),(47,'膳食库','/food','/4-4',3,NULL,NULL,11,2),(48,'疾病库','/illness','/4-5',4,NULL,NULL,11,2),(49,'用户管理','/user-controller','/7-3',3,NULL,NULL,29,2),(50,'角色管理','/role-list','/7-4',4,NULL,NULL,29,2),(51,'测试1',NULL,'9',9,NULL,NULL,NULL,1),(52,'测试1.1',NULL,'/9-1',1,NULL,NULL,51,2),(55,'资讯','/query','/5-1',1,NULL,NULL,13,2),(56,'预约列表','/ordersettinglist','/1-1',1,NULL,NULL,43,2),(57,'会员档案','/member','/1-2',2,NULL,NULL,43,2),(58,'健康干预','/health-plan','/1-3',3,NULL,NULL,43,2),(59,'测试2',NULL,'/9-1',2,NULL,NULL,51,2);
+INSERT INTO `t_menu` VALUES (1,'会员管理',NULL,'2',2,'fa-user-md',NULL,NULL,1),(2,'会员档案','/member','/2-1',1,NULL,NULL,1,2),(4,'统计分析','/report-member','/2-3',3,NULL,NULL,1,2),(5,'健康监测管理',NULL,'3',3,'fa-tty',NULL,NULL,1),(6,'预约列表','/ordersettinglist','/3-1',1,NULL,NULL,5,2),(7,'预约设置','/ordersetting','/3-2',2,NULL,NULL,5,2),(8,'套餐管理','/setmeal','/3-3',3,NULL,NULL,5,2),(9,'项目组管理','/checkgroup','/3-4',4,NULL,NULL,5,2),(10,'项目管理','/checkitem','/3-5',5,NULL,NULL,5,2),(11,'保健知识库',NULL,'4',4,'fa-book',NULL,NULL,1),(13,'咨询管理',NULL,'5',5,'fa-phone',NULL,NULL,1),(15,'儿童保健',NULL,'6',6,'fa-desktop',NULL,NULL,1),(16,'保健模板','/people-manager','/6-1',1,NULL,NULL,15,2),(17,'保健方案','/health-plan','/6-2',2,NULL,NULL,15,2),(29,'系统设置',NULL,'7',7,'fa-cog',NULL,NULL,1),(30,'菜单管理','/system-list','/7-1',1,NULL,NULL,29,2),(31,'权限管理','/permission','/7-2',2,NULL,NULL,29,2),(43,'工作台',NULL,'1',1,'fa-dashboard',NULL,NULL,1),(46,'运动知识库','/sport','/4-3',2,NULL,NULL,11,2),(47,'膳食知识库','/food','/4-4',3,NULL,NULL,11,2),(48,'疾病知识库','/illness','/4-5',4,NULL,NULL,11,2),(49,'用户管理','/user-controller','/7-3',3,NULL,NULL,29,2),(50,'角色管理','/role-list','/7-4',4,NULL,NULL,29,2),(55,'保健资讯','/query','/5-1',1,NULL,NULL,13,2),(56,'预约列表','/ordersettinglist','/1-1',1,NULL,NULL,43,2),(57,'会员档案','/member','/1-2',2,NULL,NULL,43,2),(58,'儿童保健','/health-plan','/1-3',3,NULL,NULL,43,2);
 /*!40000 ALTER TABLE `t_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -600,7 +600,7 @@ CREATE TABLE `t_role_menu` (
 
 LOCK TABLES `t_role_menu` WRITE;
 /*!40000 ALTER TABLE `t_role_menu` DISABLE KEYS */;
-INSERT INTO `t_role_menu` VALUES (1,1),(7,1),(1,2),(7,2),(1,4),(7,4),(1,5),(7,5),(1,6),(7,6),(1,7),(7,7),(1,8),(7,8),(1,9),(7,9),(1,10),(7,10),(1,11),(7,11),(1,13),(7,13),(1,15),(7,15),(1,16),(7,16),(1,17),(7,17),(1,29),(1,30),(1,31),(1,43),(2,43),(7,43),(1,46),(7,46),(1,47),(7,47),(1,48),(7,48),(1,49),(1,50),(1,51),(1,52),(1,55),(7,55),(1,56),(7,56),(1,57),(7,57),(1,58),(7,58),(1,59);
+INSERT INTO `t_role_menu` VALUES (1,1),(7,1),(1,2),(7,2),(1,4),(7,4),(1,5),(7,5),(1,6),(7,6),(1,7),(7,7),(1,8),(7,8),(1,9),(7,9),(1,10),(7,10),(1,11),(7,11),(1,13),(7,13),(1,15),(7,15),(1,16),(7,16),(1,17),(7,17),(1,29),(1,30),(1,31),(1,43),(2,43),(7,43),(1,46),(7,46),(1,47),(7,47),(1,48),(7,48),(1,49),(1,50),(1,55),(7,55),(1,56),(7,56),(1,57),(7,57),(1,58),(7,58);
 /*!40000 ALTER TABLE `t_role_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -743,7 +743,7 @@ CREATE TABLE `t_user` (
 
 LOCK TABLES `t_user` WRITE;
 /*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
-INSERT INTO `t_user` VALUES (1,'2020-08-03','2','admin','$2a$10$jWBnmKwKJwkxbTW8tcFBa.gNW51/GCikZEzekxuVccmslUewlJzYu',NULL,'1',NULL),(2,NULL,NULL,'xiaoming','$2a$10$LytoOIFTyjqWqSgaY5NrIeqg0Na632pDilCoKQ5m/qM/vSl930X8y',NULL,'2',NULL),(12,'2021-05-05','1','gly','$2a$10$WmS05xvimtu4MvBmBI/XCeVLg1IVEwDz2mlSZ0WDVAbHck/MMEgQa',NULL,'1',NULL),(13,'2021-05-03','1','gls','$2a$10$jFOZWay5CUj4xJQjF2YCSunKYSpURRdDHxn6ZkP5D5yjru.w41qZu',NULL,'1','18834121212'),(15,NULL,'1','111','$2a$10$htED3GRZS/QMtg0hlrmJ0u5XwMgJF/0xc4TDSG6yLED3yN9dM6Xwy',NULL,'1','18834161276');
+INSERT INTO `t_user` VALUES (1,'2020-08-03','2','admin','$2a$10$W4pNuuUIQj0U2MfX9dwScOIFJEe.88wWfI.IXs1hHEm24wZZiKHo6',NULL,'1',NULL),(2,'1999-09-19','1','xiaoming','$2a$10$LytoOIFTyjqWqSgaY5NrIeqg0Na632pDilCoKQ5m/qM/vSl930X8y',NULL,'2',NULL),(12,'2021-05-05','1','gly','$2a$10$WmS05xvimtu4MvBmBI/XCeVLg1IVEwDz2mlSZ0WDVAbHck/MMEgQa',NULL,'1',NULL),(13,'2021-05-03','1','gls','$2a$10$jFOZWay5CUj4xJQjF2YCSunKYSpURRdDHxn6ZkP5D5yjru.w41qZu',NULL,'1','18834121212'),(15,NULL,'1','111','$2a$10$htED3GRZS/QMtg0hlrmJ0u5XwMgJF/0xc4TDSG6yLED3yN9dM6Xwy',NULL,'1','18834161276');
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -787,4 +787,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-17 11:13:52
+-- Dump completed on 2022-07-17 23:31:24
