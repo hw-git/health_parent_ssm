@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lanqiao.dao.FoodBaseDao">
+    <!--    新增食品记录-->
+    <insert id="add" parameterType="cn.lanqiao.pojo.FoodBase">
+        insert into t_foodbase
+        (foodcode,foodname,foodtype,foodremark)
+        values
+        (#{foodcode},#{foodname},#{foodtype},#{foodremark})
+    </insert>
+    <!--根据名称修改-->
+    <update id="editFoodByName" parameterType="cn.lanqiao.pojo.FoodBase">
+        update t_foodbase
+        set foodcode = #{foodcode} , foodtype = #{foodtype} , foodremark = #{foodremark}
+        where foodname = #{foodname}
+    </update>
+    <!--根据食品名称查找记录-->
+    <select id="findCountByName" parameterType="string" resultType="long">
+        select count(foodid) from t_foodbase where foodname = #{foodname}
+    </select>
+    <!--    按条件查询-->
+    <select id="selectByCondition" parameterType="string" resultType="cn.lanqiao.pojo.FoodBase">
+        select * from t_foodbase
+        <if test="value !=null and value.length > 0">
+            where foodcode = #{value} or foodname = #{value}
+        </if>
+    </select>
+    <!--    根据id查询-->
+    <select id="findFoodById" parameterType="int" resultType="cn.lanqiao.pojo.FoodBase">
+        select * from t_foodbase where foodid = #{id}
+    </select>
+    <!--根据id修改-->
+    <update id="edit" parameterType="cn.lanqiao.pojo.FoodBase">
+        update t_foodbase
+        <set>
+            <if test="foodcode != null">
+                foodcode = #{foodcode},
+            </if>
+            <if test="foodname != null">
+                foodname = #{foodname},
+            </if>
+            <if test="foodtype != null">
+                foodtype = #{foodtype},
+            </if>
+            <if test="foodremark != null">
+                foodremark = #{foodremark},
+            </if>
+        </set>
+        where foodid = #{foodid}
+    </update>
+    <!--    根据id删除-->
+    <delete id="deleteById" parameterType="int">
+        delete from t_foodbase where foodid = #{id}
+    </delete>
+    <!--    查询全部-->
+    <select id="findAll" resultType="cn.lanqiao.pojo.FoodBase">
+        select * from t_foodbase
+    </select>
+    <!--    根据会员id查询食品id-->
+    <select id="findFoodIdsByMemberIds" parameterType="int" resultType="int">
+        SELECT food_id fid FROM intervention_template_food itf
+         WHERE template_id = (SELECT template_id tid FROM healthplan h WHERE member_id = #{member_id})
+    </select>
+
+</mapper>
+

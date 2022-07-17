@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lanqiao.dao.IntervationTemplateDao">
+    <!--新增-->
+    <insert id="add" parameterType="cn.lanqiao.pojo.IntervationTemplate">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="templateid">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into intervention_template(templatename,templatestring,apply,templatestremark,templatestate)
+        values
+        (#{templatename},#{templatestring},#{apply},#{templatestremark},#{templatestate})
+    </insert>
+
+    <!--设置关联关系-->
+    <insert id="setTemplateAndFood" parameterType="hashmap">
+        insert into intervention_template_food(template_id,food_id)
+        values
+        (#{template_id},#{food_id})
+    </insert>
+
+    <insert id="setTemplateAndSport" parameterType="hashmap">
+        insert into intervention_template_sport(template_id,sport_id)
+        values
+        (#{template_id},#{sport_id})
+    </insert>
+
+    <!--    按条件查询-->
+    <select id="selectByCondition" parameterType="string" resultType="cn.lanqiao.pojo.IntervationTemplate">
+        select * from intervention_template
+        <if test="value !=null and value.length > 0">
+            where templatename = #{value} or templatestring = #{value}
+        </if>
+    </select>
+    <!--    根据模板id查询foodid-->
+    <select id="findFoodIdByTid" parameterType="int" resultType="int">
+        select food_id from intervention_template_food where template_id = #{templateid}
+    </select>
+    <!--    根据模板id查询sportid-->
+    <select id="findSportIdByTid" parameterType="int" resultType="int">
+        select sport_id from intervention_template_sport where template_id = #{templateid}
+    </select>
+    <!--    根基id查询模板-->
+    <select id="findById" parameterType="int" resultType="cn.lanqiao.pojo.IntervationTemplate">
+        select * from intervention_template where templateid = #{templateid}
+    </select>
+    <!--    删除关联关系-->
+    <delete id="deleteTemplateFood" parameterType="int">
+        delete from intervention_template_food where food_id = #{foodid}
+    </delete>
+
+    <delete id="deleteTemplateSport" parameterType="int">
+        delete from intervention_template_sport where sport_id = #{sportid}
+    </delete>
+    <!--    修改基本数据-->
+    <update id="edit" parameterType="cn.lanqiao.pojo.IntervationTemplate">
+         update intervention_template
+         set templatename = #{templatename},templatestring = #{templatestring},
+              apply = #{apply},templatestremark = #{templatestremark},templatestate = #{templatestate}
+         where templateid = #{templateid}
+    </update>
+    <!--    修改模板状态-->
+    <update id="change" parameterType="cn.lanqiao.pojo.IntervationTemplate">
+         update intervention_template
+         set templatestate = #{templatestate}
+         where templateid = #{templateid}
+    </update>
+    <!--    根据模板id删除食品或运动模板-->
+    <delete id="deleteTemplateFoodByTID" parameterType="int">
+        delete from intervention_template_food where template_id = #{templateid}
+    </delete>
+
+    <delete id="deleteTemplateSportByTID" parameterType="int">
+        delete from intervention_template_sport where template_id = #{templateid}
+    </delete>
+
+    <delete id="deleteTemplateHealthPlanByTID" parameterType="int">
+        delete from healthplan where template_id = #{templateid}
+    </delete>
+    <!--    根据id删除模板-->
+    <delete id="delete" parameterType="int">
+        delete from intervention_template where templateid = #{templateid}
+    </delete>
+    <!--    查询所有模板-->
+    <select id="findAll" resultType="cn.lanqiao.pojo.IntervationTemplate">
+        select * from intervention_template where templatestate = true
+    </select>
+</mapper>

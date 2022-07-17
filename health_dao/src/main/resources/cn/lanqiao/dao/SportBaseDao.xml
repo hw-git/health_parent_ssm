@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lanqiao.dao.SportBaseDao">
+    <!--    新增食品记录-->
+    <insert id="add" parameterType="cn.lanqiao.pojo.SportBase">
+        insert into t_sportbase
+        (sportcode,sportname,sporttype,sportremark)
+        values
+        (#{sportcode},#{sportname},#{sporttype},#{sportremark})
+    </insert>
+    <!--根据名称修改-->
+    <update id="editSportByName" parameterType="cn.lanqiao.pojo.SportBase">
+        update t_sportbase
+        set sportcode = #{sportcode} , sporttype = #{sporttype} , sportremark = #{sportremark}
+        where sportname = #{sportname}
+    </update>
+    <!--根据食品名称查找记录-->
+    <select id="findCountByName" parameterType="string" resultType="long">
+        select count(sportid) from t_sportbase where sportname = #{sportname}
+    </select>
+    <!--    按条件查询-->
+    <select id="selectByCondition" parameterType="string" resultType="cn.lanqiao.pojo.SportBase">
+        select * from t_sportbase
+        <if test="value !=null and value.length > 0">
+            where sportcode = #{value} or sportname = #{value}
+        </if>
+    </select>
+    <!--    根据id查询-->
+    <select id="findSportById" parameterType="int" resultType="cn.lanqiao.pojo.SportBase">
+        select * from t_sportbase where sportid = #{id}
+    </select>
+    <!--根据id修改-->
+    <update id="edit" parameterType="cn.lanqiao.pojo.SportBase">
+        update t_sportbase
+        <set>
+            <if test="sportcode != null">
+                sportcode = #{sportcode},
+            </if>
+            <if test="sportname != null">
+                sportname = #{sportname},
+            </if>
+            <if test="sporttype != null">
+                sporttype = #{sporttype},
+            </if>
+            <if test="sportremark != null">
+                sportremark = #{sportremark},
+            </if>
+        </set>
+        where sportid = #{sportid}
+    </update>
+    <!--    根据id删除-->
+    <delete id="deleteById" parameterType="int">
+        delete from t_sportbase where sportid = #{id}
+    </delete>
+    <!--查询全部-->
+    <select id="findAll" resultType="cn.lanqiao.pojo.SportBase">
+        select * from t_sportbase
+    </select>
+
+    <!--    根据会员id查询运动id-->
+    <select id="findSportIdsByMemberIds" parameterType="int" resultType="int">
+       SELECT sport_id sid FROM intervention_template_sport its
+       WHERE template_id = (SELECT template_id tid FROM healthplan h WHERE member_id = #{member_id})
+    </select>
+</mapper>
+

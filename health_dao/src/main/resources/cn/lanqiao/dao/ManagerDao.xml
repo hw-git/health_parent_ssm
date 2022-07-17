@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.lanqiao.dao.ManagerDao">
+
+    <select id="findAll" resultType="cn.lanqiao.pojo.Manager">
+        select * from t_manager
+    </select>
+    <select id="findManagerByCondition" resultType="cn.lanqiao.pojo.Manager">
+        select * from t_manager
+        <if test="value != null and value.length > 0">
+            where name = #{value} or type = #{value}
+        </if>
+    </select>
+    <select id="findById" resultType="cn.lanqiao.pojo.Manager">
+        select * from t_manager where id = #{id}
+    </select>
+    <update id="edit" parameterType="cn.lanqiao.pojo.Manager">
+        update t_manager
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="text != null">
+                text = #{text},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="img != null">
+                img = #{img},
+            </if>
+            <if test="url != null">
+                url = #{url},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from t_manager where id = #{id}
+    </delete>
+    <insert id="add" parameterType="cn.lanqiao.pojo.Manager">
+        insert into t_manager(name,text,type ,img,url)
+        values
+            (#{name},#{text},#{type},#{img},#{url})
+    </insert>
+    <select id="findByType" resultType="cn.lanqiao.pojo.Manager">
+    select * from t_manager where type=#{type}
+    </select>
+
+</mapper>

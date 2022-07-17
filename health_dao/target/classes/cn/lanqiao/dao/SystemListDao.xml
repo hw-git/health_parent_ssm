@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lanqiao.dao.SystemListDao">
+    <!--    条件查询-->
+    <select id="findByLevel" parameterType="string" resultType="cn.lanqiao.pojo.Menu">
+        select * from t_menu where level = 1
+        ORDER BY path
+    </select>
+    <!--    根据名称查询-->
+    <select id="findByName" parameterType="string" resultType="cn.lanqiao.pojo.Menu">
+        select * from t_menu where name = #{uname}
+    </select>
+
+    <!--自关联查询-->
+    <!--形成递归查询-->
+    <resultMap id="childrenMap" type="cn.lanqiao.pojo.Menu">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="linkUrl" property="linkUrl"/>
+        <result column="path" property="path"/>
+        <result column="priority" property="priority"/>
+        <result column="description" property="description"/>
+        <result column="level" property="level"/>
+        <collection property="children" ofType="cn.lanqiao.pojo.Menu" select="findById" column="id"/>
+    </resultMap>
+
+    <select id="findById" resultMap="childrenMap">
+    SELECT *
+    FROM t_menu
+    WHERE parentMenuId = #{pid}
+    ORDER BY priority
+</select>
+
+    <!--    查询所有菜单-->
+    <select id="findAllLable" resultType="cn.lanqiao.pojo.Menu">
+    select * from t_menu
+    order by substring_index(path,"/",-1)
+</select>
+
+    <!--    查询path最大值-->
+    <select id="findPathMax" resultType="string">
+    SELECT max(path) as path from t_menu
+</select>
+
+    <!--    添加新菜单-->
+    <insert id="add" parameterType="cn.lanqiao.pojo.Menu">
+    insert into t_menu (name,linkUrl,path,priority,description,parentMenuId,level)
+    values
+    (#{name},#{linkUrl},#{path},#{priority},#{description},#{parentMenuId},#{level})
+
+</insert>
+    <!--根据id查询-->
+    <select id="findParentById" parameterType="int" resultType="cn.lanqiao.pojo.Menu">
+        select * from t_menu where id = #{id}
+    </select>
+    <!--根据自关联id查询总数-->
+    <select id="childCount" parameterType="int" resultType="java.lang.Long">
+        SELECT COUNT(id) FROM t_menu WHERE parentMenuId = #{parentMenuId}
+    </select>
+    <!--根据id查询菜单-->
+    <select id="findMenuById" resultType="cn.lanqiao.pojo.Menu">
+        select  * from t_menu where id = #{id}
+    </select>
+    <!--修改菜单数据-->
+    <update id="edit" parameterType="cn.lanqiao.pojo.Menu">
+    update t_menu
+    set name = #{name} ,linkUrl = #{linkUrl},path = #{path},priority = #{priority},description = #{description},parentMenuId = #{parentMenuId},level = #{level}
+    where id = #{id}
+    </update>
+    <!--删除菜单-->
+    <delete id="delete" parameterType="int">
+        delete from t_menu where id = #{id}
+    </delete>
+    <!--查询所有-->
+    <select id="findAll" resultType="cn.lanqiao.pojo.Menu">
+        select * from t_menu
+        order by substring_index(path,"/",-1)
+    </select>
+</mapper>

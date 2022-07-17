@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lanqiao.dao.HealthPlanDao">
+    <!--    按条件查询-->
+    <select id="selectByCondition" parameterType="string" resultType="cn.lanqiao.pojo.Member">
+        SELECT distinct m.id id , m.fileNumber fileNumber , NAME , sex ,birthday ,phoneNumber, email
+        FROM t_order o, t_member m
+        WHERE m.id = o.member_id AND o.orderStatus = '已到诊'
+        <if test="value !=null and value.length > 0">
+            and name = #{value}
+        </if>
+    </select>
+
+    <!--    根据id查询会员-->
+    <select id="findMemberById" parameterType="int" resultType="cn.lanqiao.pojo.Member">
+        select * from t_member where id = #{id}
+    </select>
+    <!--    根据会员id查询检查-->
+    <select id="findOrderById" parameterType="int" resultType="cn.lanqiao.pojo.Order">
+         SELECT  * FROM t_order o WHERE  o.member_id = #{id}
+         AND o.orderStatus = '已到诊'
+         order by id desc limit 1
+    </select>
+    <!--根据id查询套餐-->
+    <select id="findSetmealById" parameterType="int" resultType="cn.lanqiao.pojo.Setmeal">
+        select * from t_setmeal where id = #{id}
+    </select>
+    <!--    根据会员id查询关联的模板id-->
+    <select id="findHealthPlan" resultType="int">
+        select template_id from healthplan where member_id = #{id}
+    </select>
+    <!--    删除干预记录-->
+    <delete id="deletePlan" parameterType="int">
+        delete from healthplan where member_id = #{member_id}
+    </delete>
+    <!--    新增干预-->
+    <insert id="addPlan" parameterType="int">
+        insert into
+            healthplan
+        values
+            (#{member_id},#{template_id})
+    </insert>
+</mapper>

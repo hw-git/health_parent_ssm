@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lanqiao.dao.UserListDao">
+    <!--根据用户名查询角色id-->
+    <select id="findRoleIdByUsername" parameterType="string" resultType="int">
+        SELECT role_id FROM t_user_role t WHERE user_id =
+        (SELECT id FROM t_user WHERE username = #{username})
+    </select>
+
+    <select id="findMenuByRoleId" parameterType="int" resultType="cn.lanqiao.pojo.Menu">
+       SELECT * FROM t_menu WHERE id IN (
+        SELECT menu_id FROM t_role_menu WHERE role_id = #{role_id})
+        order by substring_index(path,"/",-1)
+   </select>
+</mapper>
